@@ -1,0 +1,25 @@
+# Vendor trees are large and reproducible with composer install.
+ref/vendor/
+sut/vendor/
+ref/node_modules/
+sut/node_modules/
+
+# Build and run artefacts
+dist/
+ref/storage/logs/*
+sut/storage/logs/*
+ref/storage/framework/cache/*
+sut/storage/framework/cache/*
+ref/bootstrap/cache/*.php
+sut/bootstrap/cache/*.php
+ref/.phpunit.cache/
+sut/.phpunit.cache/
+ref/database/database.sqlite
+sut/database/database.sqlite
+
+# The REF tests directory is a staging copy; solution/tests is the source of truth.
+ref/tests/Unit/
+ref/tests/Feature/
+ref/tests/Security/
+
+.DS_Store

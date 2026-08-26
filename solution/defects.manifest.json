@@ -1,0 +1,172 @@
+{
+  "module": "B",
+  "source": "WSC2024_TP17_MB_actual_en.pdf — Module B, Products Management",
+  "note": "Trainer-only. The seeded defects present in the SUT build, and the test names that prove each one. A defect counts as detected when at least one failing test name contains one of its `detectedBy` fragments.",
+  "defects": [
+    {
+      "id": "B-D01",
+      "kind": "functional",
+      "severity": "major",
+      "area": "Gtin::isValidFormat()",
+      "spec": "R1 — a GTIN is any sequence of 13 or 14 digits",
+      "actual": "A 12 digit code passes validation",
+      "detectedBy": ["rejects anything that is not 13 or 14 digits", "rejects a GTIN that is not 13 or 14 digits"]
+    },
+    {
+      "id": "B-D02",
+      "kind": "functional",
+      "severity": "blocker",
+      "area": "Company::deactivate()",
+      "spec": "R2 — deactivating a company marks all of its products hidden",
+      "actual": "The company is flagged but its products stay visible, including in the public API",
+      "detectedBy": [
+        "hides every product of the company when it is deactivated",
+        "removes the hidden products from the public API",
+        "hides every product of a deactivated company"
+      ]
+    },
+    {
+      "id": "B-D03",
+      "kind": "functional",
+      "severity": "major",
+      "area": "ProductApiController::PER_PAGE",
+      "spec": "R4 — the products JSON paginates 10 per page",
+      "actual": "20 products per page, so per_page and total_pages are wrong",
+      "detectedBy": ["paginates ten products per page", "serves a different set of products on page two"]
+    },
+    {
+      "id": "B-D04",
+      "kind": "functional",
+      "severity": "major",
+      "area": "ProductApiController::index() pagination block",
+      "spec": "R4 — next_page_url and prev_page_url point forward and backward",
+      "actual": "The two links are swapped",
+      "detectedBy": ["links to the next page and not to a previous one", "links back and stops linking forward"]
+    },
+    {
+      "id": "B-D05",
+      "kind": "functional",
+      "severity": "major",
+      "area": "Product::scopeMatching()",
+      "spec": "R6 — the keyword matches name, name in French, description and description in French",
+      "actual": "Only the English fields are searched",
+      "detectedBy": ["searches each of the four translated fields", "filters the listing by keyword across both languages"]
+    },
+    {
+      "id": "B-D06",
+      "kind": "functional",
+      "severity": "blocker",
+      "area": "Product::isDeletable()",
+      "spec": "R3 — only a hidden product may be deleted permanently",
+      "actual": "Any product can be deleted, visible ones included",
+      "detectedBy": ["refuses to delete a visible product"]
+    },
+    {
+      "id": "B-D07",
+      "kind": "functional",
+      "severity": "major",
+      "area": "PublicController::verify()",
+      "spec": "R8 — the all valid banner appears only when every submitted code is valid",
+      "actual": "The banner appears as soon as one code is valid",
+      "detectedBy": ["does not show the all valid banner when one code is unknown"]
+    },
+    {
+      "id": "B-D08",
+      "kind": "functional",
+      "severity": "major",
+      "area": "PublicController::product()",
+      "spec": "R9 — the public product page serves English or French with a matching lang attribute",
+      "actual": "The language parameter is ignored, the page is always English",
+      "detectedBy": ["switches to french content and the french lang attribute"]
+    },
+    {
+      "id": "B-S01",
+      "kind": "security",
+      "severity": "blocker",
+      "area": "Product::scopeMatching()",
+      "spec": "S1 — no parameter reaches the database as concatenated SQL",
+      "actual": "The keyword is interpolated into a raw WHERE clause, wildcards included",
+      "detectedBy": [
+        "treats an injection payload in the API keyword",
+        "treats an injection payload in the admin search",
+        "never returns a database error message",
+        "does not let a wildcard payload widen the result set"
+      ]
+    },
+    {
+      "id": "B-S02",
+      "kind": "security",
+      "severity": "blocker",
+      "area": "Product::$fillable and ProductController::store()/update()",
+      "spec": "S2 — is_hidden, id and timestamps are not client-writable",
+      "actual": "The model is filled from the raw request, so a form can publish or hide a product",
+      "detectedBy": ["ignores an is_hidden flag submitted with a new product", "ignores an is_hidden flag submitted with an update"]
+    },
+    {
+      "id": "B-S03",
+      "kind": "security",
+      "severity": "major",
+      "area": "RequireAdminSession",
+      "spec": "R7 / S3 — management functions answer 401 without a session",
+      "actual": "The gate redirects to the login page instead, so an unauthenticated client sees 302",
+      "detectedBy": [
+        "answers 401, not a redirect",
+        "answers 401 for every management route",
+        "answers 401 for a management page requested as a document"
+      ]
+    },
+    {
+      "id": "B-S04",
+      "kind": "security",
+      "severity": "blocker",
+      "area": "StoreProductRequest image rule",
+      "spec": "S4 — only image files up to 2 MB are accepted as a product image",
+      "actual": "Any file is accepted, an executable included",
+      "detectedBy": [
+        "rejects an executable disguised as an upload",
+        "rejects an image with a double extension",
+        "rejects an image larger than 2 MB",
+        "rejects a file that is not an image"
+      ]
+    },
+    {
+      "id": "B-S05",
+      "kind": "security",
+      "severity": "major",
+      "area": "AuthController::store()",
+      "spec": "S5 — the passphrase form is rate limited and the comparison is constant time",
+      "actual": "The rate limiter was removed and the comparison is a plain string compare",
+      "detectedBy": ["rate limits repeated wrong passphrases", "does not authenticate the session while the limiter is tripped"]
+    },
+    {
+      "id": "B-S06",
+      "kind": "security",
+      "severity": "blocker",
+      "area": "ProductApiController::show()",
+      "spec": "R5 / S6 — a hidden product answers 404 on the single product endpoint",
+      "actual": "Hidden products are served in full through the JSON API",
+      "detectedBy": ["answers 404 for a hidden product", "answers 404 on the single product endpoint"]
+    },
+    {
+      "id": "B-S07",
+      "kind": "security",
+      "severity": "blocker",
+      "area": "products/show.blade.php and public/product.blade.php",
+      "spec": "S7 — stored free text is escaped wherever it is rendered",
+      "actual": "The product name and description are rendered with {!! !!}: stored XSS executes",
+      "detectedBy": [
+        "escapes a product name and description on the admin product page",
+        "escapes the product name on the public product page"
+      ]
+    },
+    {
+      "id": "B-S08",
+      "kind": "security",
+      "severity": "major",
+      "area": "bootstrap/app.php exception rendering",
+      "spec": "S8 — a failed request never returns a stack trace, a file path or SQL",
+      "actual": "Failures fall through to the framework renderer, leaking exception messages, paths and traces",
+      "detectedBy": ["answers a failed deletion without leaking internals", "answers a failing request without leaking internals"]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "M01",
+    "file": "app/Services/Gtin.php",
+    "description": "a 14 digit GTIN is rejected: only 13 digits pass"
+  },
+  {
+    "id": "M02",
+    "file": "app/Services/Gtin.php",
+    "description": "a 12 digit GTIN is accepted"
+  },
+  {
+    "id": "M03",
+    "file": "app/Services/Gtin.php",
+    "description": "bulk input lines are no longer trimmed"
+  },
+  {
+    "id": "M04",
+    "file": "app/Services/Gtin.php",
+    "description": "blank lines survive the bulk input parsing"
+  },
+  {
+    "id": "M05",
+    "file": "app/Models/Product.php",
+    "description": "the keyword search drops the French description"
+  },
+  {
+    "id": "M06",
+    "file": "app/Models/Product.php",
+    "description": "the visible scope stops filtering hidden products"
+  },
+  {
+    "id": "M07",
+    "file": "app/Models/Product.php",
+    "description": "a hidden product is reported as not deletable"
+  },
+  {
+    "id": "M08",
+    "file": "app/Models/Company.php",
+    "description": "deactivation no longer cascades to the products"
+  },
+  {
+    "id": "M09",
+    "file": "app/Models/Company.php",
+    "description": "reactivating a company unhides all of its products again"
+  },
+  {
+    "id": "M10",
+    "file": "app/Http/Controllers/ProductApiController.php",
+    "description": "the API paginates five products per page"
+  },
+  {
+    "id": "M11",
+    "file": "app/Http/Controllers/ProductApiController.php",
+    "description": "the pagination links no longer carry the query string"
+  },
+  {
+    "id": "M12",
+    "file": "app/Models/Product.php",
+    "description": "the API drops the weight unit"
+  },
+  {
+    "id": "M13",
+    "file": "app/Models/Product.php",
+    "description": "the API flattens the product name to English only"
+  },
+  {
+    "id": "M14",
+    "file": "app/Http/Controllers/PublicController.php",
+    "description": "the all valid banner appears when any code is valid"
+  },
+  {
+    "id": "M15",
+    "file": "app/Http/Controllers/PublicController.php",
+    "description": "the public product page always renders English"
+  },
+  {
+    "id": "M16",
+    "file": "app/Http/Middleware/RequireAdminSession.php",
+    "description": "the management gate lets everyone through"
+  }
+]

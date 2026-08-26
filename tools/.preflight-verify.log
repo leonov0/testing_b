@@ -1,0 +1,81 @@
+suite under assessment: /Users/valdisaglonietis/PhpstormProjects/skills/2026_test/module_b/solution/tests
+
+== REF run (every test must pass) ============================================
+  tests: 165   passed: 165   failed: 0
+  no false positives - every assertion holds on the correct implementation
+
+== SUT run (seeded defects must be detected) =================================
+  tests: 165   passed: 115   failed: 50
+  DETECTED B-D01 [functional|major  ] Gtin::isValidFormat()
+           proven by: Tests\Unit\GtinTest::it rejects anything that is not 13 or 14 digits with data set "dataset "twelve digits""
+  DETECTED B-D02 [functional|blocker] Company::deactivate()
+           proven by: Tests\Feature\CompanyDeactivationTest::it hides every product of the company when it is deactivated
+  DETECTED B-D03 [functional|major  ] ProductApiController::PER_PAGE
+           proven by: Tests\Feature\ProductApiTest::it paginates ten products per page
+  DETECTED B-D04 [functional|major  ] ProductApiController::index() pagination block
+           proven by: Tests\Feature\ProductApiTest::it links to the next page and not to a previous one on page one
+  DETECTED B-D05 [functional|major  ] Product::scopeMatching()
+           proven by: Tests\Feature\ProductApiTest::it filters the listing by keyword across both languages
+  DETECTED B-D06 [functional|blocker] Product::isDeletable()
+           proven by: Tests\Feature\ProductLifecycleTest::it refuses to delete a visible product
+  DETECTED B-D07 [functional|major  ] PublicController::verify()
+           proven by: Tests\Feature\PublicPagesTest::it does not show the all valid banner when one code is unknown
+  DETECTED B-D08 [functional|major  ] PublicController::product()
+           proven by: Tests\Feature\PublicPagesTest::it switches to french content and the french lang attribute
+  DETECTED B-S01 [security  |blocker] Product::scopeMatching()
+           proven by: Tests\Security\S1SqlInjectionTest::it treats an injection payload in the API keyword as an ordinary search term with data set "dataset "or one equals one""
+  DETECTED B-S02 [security  |blocker] Product::$fillable and ProductController::store()/update()
+           proven by: Tests\Security\S2MassAssignmentTest::it ignores an is_hidden flag submitted with a new product
+  DETECTED B-S03 [security  |major  ] RequireAdminSession
+           proven by: Tests\Feature\AdminAuthTest::it answers 401, not a redirect, for every management route without a session
+  DETECTED B-S04 [security  |blocker] StoreProductRequest image rule
+           proven by: Tests\Feature\ProductLifecycleTest::it rejects a file that is not an image
+  DETECTED B-S05 [security  |major  ] AuthController::store()
+           proven by: Tests\Security\S5PassphraseTest::it rate limits repeated wrong passphrases
+  DETECTED B-S06 [security  |blocker] ProductApiController::show()
+           proven by: Tests\Feature\ProductApiTest::it answers 404 for a hidden product
+  DETECTED B-S07 [security  |blocker] products/show.blade.php and public/product.blade.php
+           proven by: Tests\Security\S7EscapingTest::it escapes a product name and description on the admin product page
+  DETECTED B-S08 [security  |major  ] bootstrap/app.php exception rendering
+           proven by: Tests\Security\S8ErrorLeakageTest::it answers a failed deletion without leaking internals
+  seeded defects detected: 16/16
+
+== MUT runs (each mutant must break at least one test) =======================
+  CAUGHT   M01 a 14 digit GTIN is rejected: only 13 digits pass
+           killed by: Tests\Unit\GtinTest::it accepts a code of 13 or 14 digits with data set "dataset "fourteen digits""
+  CAUGHT   M02 a 12 digit GTIN is accepted
+           killed by: Tests\Unit\GtinTest::it rejects anything that is not 13 or 14 digits with data set "dataset "twelve digits""
+  CAUGHT   M03 bulk input lines are no longer trimmed
+           killed by: Tests\Unit\GtinTest::it trims each line and drops the empty ones
+  CAUGHT   M04 blank lines survive the bulk input parsing
+           killed by: Tests\Unit\GtinTest::it trims each line and drops the empty ones
+  CAUGHT   M05 the keyword search drops the French description
+           killed by: Tests\Feature\ProductManagementTest::it searches each of the four translated fields
+  CAUGHT   M06 the visible scope stops filtering hidden products
+           killed by: Tests\Feature\CompanyDeactivationTest::it removes the hidden products from the public API
+  CAUGHT   M07 a hidden product is reported as not deletable
+           killed by: Tests\Feature\ProductLifecycleTest::it deletes a hidden product permanently
+  CAUGHT   M08 deactivation no longer cascades to the products
+           killed by: Tests\Feature\CompanyDeactivationTest::it hides every product of the company when it is deactivated
+  CAUGHT   M09 reactivating a company unhides all of its products again
+           killed by: Tests\Feature\CompanyDeactivationTest::it does not unhide the products when the company is reactivated
+  CAUGHT   M10 the API paginates five products per page
+           killed by: Tests\Feature\ProductApiTest::it paginates ten products per page
+  CAUGHT   M11 the pagination links no longer carry the query string
+           killed by: Tests\Feature\ProductApiTest::it keeps the keyword on the pagination links
+  CAUGHT   M12 the API drops the weight unit
+           killed by: Tests\Unit\ApiShapeTest::it serialises the weight as gross, net and unit
+  CAUGHT   M13 the API flattens the product name to English only
+           killed by: Tests\Unit\ApiShapeTest::it serialises a product with both languages nested per field
+  CAUGHT   M14 the all valid banner appears when any code is valid
+           killed by: Tests\Feature\PublicPagesTest::it does not show the all valid banner when one code is unknown
+  CAUGHT   M15 the public product page always renders English
+           killed by: Tests\Feature\PublicPagesTest::it switches to french content and the french lang attribute
+  CAUGHT   M16 the management gate lets everyone through
+           killed by: Tests\Feature\AdminAuthTest::it answers 401, not a redirect, for every management route without a session
+  mutants caught: 16/16
+
+=============================================================================
+REF     : OK - no false positives
+SUT     : OK - every seeded defect detected
+MUTANTS : OK - all mutants caught
