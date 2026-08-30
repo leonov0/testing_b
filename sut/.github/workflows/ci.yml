@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    name: Module B test suite
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the application under test
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mbstring, sqlite3, pdo_sqlite, fileinfo, gd
+          coverage: pcov
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Prepare the environment
+        run: |
+          cp -n .env.example .env || true
+          php artisan key:generate
+
+      - name: Unit tests
+        run: ./vendor/bin/pest --testsuite Unit
+
+      - name: Feature tests
+        run: ./vendor/bin/pest --testsuite Feature
+
+      - name: Security tests
+        run: ./vendor/bin/pest --testsuite Security
+
+      - name: Coverage report
+        if: always()
+        run: ./vendor/bin/pest --coverage --min=0 || true

@@ -1,0 +1,371 @@
+Module B - coverage summary
+===========================
+
+No coverage driver on this machine:
+
+    $ php -m | grep -iE 'xdebug|pcov'
+    (no output)
+
+So `php artisan test --coverage` cannot report line percentages. The task document allows a
+fallback (Part 6.1): the list of tests is committed instead, and the App\Services / App\Models
+>= 90% and App\Http >= 75% thresholds do not apply here. See expert_readme.txt for the command
+that gives the real report on a machine with Xdebug or PCOV.
+
+Test list - ./vendor/bin/pest --list-tests
+------------------------------------------
+
+
+   INFO  Available tests:
+
+ - P\Tests\Unit\CompanyApiArrayTest::__pest_evaluable_it_exposes_exactly_the_documented_top_level_keys
+ - P\Tests\Unit\CompanyApiArrayTest::__pest_evaluable_it_reports_the_company_identity_under_its_documented_key_names
+ - P\Tests\Unit\CompanyApiArrayTest::__pest_evaluable_it_nests_the_owner_as_a_name__mobile_number_and_email_object
+ - P\Tests\Unit\CompanyApiArrayTest::__pest_evaluable_it_nests_the_contact_as_a_name__mobile_number_and_email_object
+ - P\Tests\Unit\CompanyApiArrayTest::__pest_evaluable_it_exposes_no_internal_column
+ - P\Tests\Unit\CompanyApiArrayTest::__pest_evaluable_it_does_not_leak_the_deactivated_flag_of_a_deactivated_company
+ - P\Tests\Unit\ExampleTest::__pest_evaluable_it_accepts_a_13_digit_GTIN
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_splits_codes_separated_by_unix_line_breaks
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_splits_codes_separated_by_windows_line_breaks
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_splits_codes_separated_by_carriage_returns_alone
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_trims_spaces_surrounding_each_code
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_trims_a_single_code_submitted_with_surrounding_spaces
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_drops_blank_lines_between_codes
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_drops_whitespace_only_lines
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_drops_leading_and_trailing_blank_lines
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_keeps_the_submitted_order
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_keeps_duplicate_codes_as_separate_entries
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_keeps_entries_that_are_not_valid_GTIN_codes_so_they_can_be_reported
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_returns_an_empty_list_for_an_empty_string
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_returns_an_empty_list_for_null
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_returns_an_empty_list_for_whitespace_only_input
+ - P\Tests\Unit\GtinBulkInputTest::__pest_evaluable_it_returns_a_list_indexed_from_zero_after_dropping_blank_lines
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_accepts_a_13_digit_code
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_accepts_a_14_digit_code
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_accepts_a_13_digit_code_whose_leading_zeros_are_significant
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_accepts_a_14_digit_code_whose_leading_zeros_are_significant
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_accepts_an_integer_of_13_digits
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_12_digit_code_as_one_digit_too_short
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_an_11_digit_code
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_15_digit_code_as_one_digit_too_long
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_containing_letters
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_that_is_entirely_letters
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_with_a_leading_space
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_with_a_trailing_space
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_with_an_inner_space
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_containing_a_hyphen
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_carrying_a_plus_sign
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_code_carrying_a_decimal_point
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_decimal_number_of_the_right_digit_count
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_the_empty_string
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_string_of_spaces
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_null
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_float
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_a_boolean
+ - P\Tests\Unit\GtinFormatTest::__pest_evaluable_it_rejects_an_array
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_nests_the_product_name_in_both_languages
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_nests_the_product_description_in_both_languages
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_reports_the_weight_as_a_gross__net_and_unit_triple
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_reports_the_GTIN__brand_and_country_of_origin
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_nests_the_owning_company
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_keeps_a_null_description_in_both_languages_rather_than_dropping_the_key
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_exposes_exactly_the_documented_top_level_keys
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_exposes_no_internal_column
+ - P\Tests\Unit\ProductApiArrayTest::__pest_evaluable_it_does_not_leak_the_hidden_flag_of_a_hidden_product
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_shows_the_passphrase_form_on_the_login_page
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_does_not_authenticate_a_wrong_passphrase
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_reports_an_error_for_a_wrong_passphrase
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_does_not_authenticate_a_missing_passphrase
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_does_not_authenticate_an_empty_passphrase
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_authenticates_the_correct_passphrase
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_opens_the_management_area_once_the_passphrase_is_accepted
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_closes_the_session_on_logout
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_locks_the_management_area_again_after_logout
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_answers_401_on_every_management_route_for_a_document_request
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_answers_401_on_every_management_route_for_a_JSON_request
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_never_redirects_an_unauthenticated_management_request_to_the_login_page
+ - P\Tests\Feature\AdminAccessTest::__pest_evaluable_it_keeps_the_public_surfaces_open_without_a_session
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_lists_the_active_companies
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_lists_the_deactivated_companies_separately
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_shows_a_company_with_the_products_it_owns
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_shows_the_hidden_products_of_a_company_on_its_management_page
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_serves_the_new_company_form
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_creates_a_company_from_a_complete_submission
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_creates_a_company_that_is_active
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('company_name')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('company_address')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('company_telephone')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('company_email')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('owner_name')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('owner_mobile')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('owner_email')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('contact_name')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('contact_mobile')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_missing_a_required_field"('contact_email')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_whose_email_address_is_malformed"('company_email')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_whose_email_address_is_malformed"('owner_email')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_a_company_submission_whose_email_address_is_malformed"('contact_email')"
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_serves_the_edit_form_of_an_existing_company
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_updates_a_company
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_refuses_an_update_that_empties_a_required_field
+ - P\Tests\Feature\CompanyManagementTest::__pest_evaluable_it_exposes_no_delete_route_for_a_company
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_hides_every_product_of_the_company_when_the_model_deactivates_it
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_marks_the_company_deactivated_when_the_model_deactivates_it
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_hides_every_product_of_the_company_through_the_deactivate_route
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_leaves_the_products_of_other_companies_visible
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_moves_the_company_from_the_active_listing_to_the_deactivated_listing
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_drops_the_products_of_a_deactivated_company_from_the_public_API
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_answers_404_on_the_single_product_endpoint_of_a_deactivated_company
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_answers_404_on_the_public_page_of_a_deactivated_company_product
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_keeps_the_products_hidden_when_the_company_is_reactivated
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_keeps_the_products_hidden_when_the_company_is_reactivated_through_its_route
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_returns_the_company_to_the_active_listing_when_it_is_reactivated
+ - P\Tests\Feature\DeactivationCascadeTest::__pest_evaluable_it_leaves_an_already_hidden_product_hidden_when_the_company_is_deactivated
+ - P\Tests\Feature\ExampleTest::__pest_evaluable_it_serves_the_public_products_API_without_a_session
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_creates_a_product_from_a_13_digit_GTIN
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_creates_a_product_from_a_14_digit_GTIN
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_keeps_the_leading_zeros_of_a_submitted_GTIN
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_creates_a_product_that_is_visible
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "12 digits""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "15 digits""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "letters""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "inner space""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "hyphen""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "plus sign""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "decimal point""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_of_the_wrong_shape"dataset "empty""
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_GTIN_that_already_belongs_to_another_product
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('company_id')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('gtin')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('name_en')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('name_fr')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('brand')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('country_of_origin')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('weight_unit')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('weight_gross')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_submission_missing_a_required_field"('weight_net')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_accepts_a_product_without_any_description
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_non_numeric_weight"('weight_gross')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_non_numeric_weight"('weight_net')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_weight_of_zero"('weight_gross')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_weight_of_zero"('weight_net')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_negative_weight"('weight_gross')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_negative_weight"('weight_net')"
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_net_weight_heavier_than_the_gross_weight
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_accepts_a_net_weight_equal_to_the_gross_weight
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_a_product_for_a_company_that_does_not_exist
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_serves_the_new_product_form
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_updates_a_product_keeping_its_own_GTIN
+ - P\Tests\Feature\ProductCreationTest::__pest_evaluable_it_refuses_an_update_taking_a_GTIN_that_belongs_to_another_product
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_stores_an_uploaded_image
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_stores_the_uploaded_image_under_a_generated_path_in_the_image_directory
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_refuses_a_file_that_is_not_an_image
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_refuses_an_image_heavier_than_2_MB
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_accepts_an_image_well_under_2_MB
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_removes_the_previous_file_when_the_image_is_replaced
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_keeps_the_stored_image_when_a_product_is_updated_without_a_new_file
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_removes_the_image_on_request_and_deletes_the_file
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_falls_back_to_the_placeholder_image_on_the_public_page_when_no_image_is_uploaded
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_shows_the_uploaded_image_on_the_public_page
+ - P\Tests\Feature\ProductImageTest::__pest_evaluable_it_deletes_the_stored_image_when_the_product_is_deleted
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_reports_a_visible_product_as_not_deletable
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_reports_a_hidden_product_as_deletable
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_hides_a_visible_product
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_unhides_a_hidden_product
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_refuses_to_delete_a_visible_product_with_409
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_refuses_to_delete_a_product_that_has_just_been_unhidden
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_deletes_a_hidden_product
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_deletes_a_product_once_it_has_been_hidden_through_the_hide_route
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_shows_a_product_on_its_management_page_whether_hidden_or_visible
+ - P\Tests\Feature\ProductLifecycleTest::__pest_evaluable_it_leaves_the_other_products_untouched_when_one_is_deleted
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_shows_visible_and_hidden_products_in_the_management_listing
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_marks_a_hidden_product_as_hidden_in_the_management_listing
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_finds_a_product_by_its_English_name
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_finds_a_product_by_its_French_name
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_finds_a_product_by_its_English_description
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_finds_a_product_by_its_French_description
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_matches_the_keyword_case_insensitively_in_the_English_name
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_matches_the_keyword_case_insensitively_in_the_French_description
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_matches_a_keyword_found_in_the_middle_of_a_field
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_lists_every_product_when_no_keyword_is_submitted
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_lists_every_product_when_the_keyword_is_blank
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_reports_no_match_for_a_keyword_that_matches_nothing
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_searches_hidden_products_in_the_management_listing_too
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_searches_the_French_fields_through_the_JSON_API_too
+ - P\Tests\Feature\ProductListingSearchTest::__pest_evaluable_it_searches_the_French_description_through_the_JSON_API_too
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_answers_with_the_documented_envelope
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_exposes_exactly_the_documented_pagination_keys
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_reports_a_page_size_of_ten
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_serves_ten_products_on_a_full_page
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_counts_the_pages_from_a_page_size_of_ten
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_serves_the_remaining_products_on_the_second_page
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_serves_different_products_on_the_second_page
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_has_no_previous_page_link_on_the_first_page
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_links_to_the_second_page_from_the_first
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_has_no_next_page_link_on_the_last_page
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_links_back_to_the_first_page_from_the_second
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_has_neither_link_when_everything_fits_on_one_page
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_keeps_the_query_string_on_the_next_page_link
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_keeps_the_query_string_on_the_previous_page_link
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_filters_the_listing_by_keyword
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_counts_only_the_matching_products_when_a_keyword_is_submitted
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_omits_hidden_products_from_the_data
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_omits_hidden_products_from_the_pagination_totals
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_serves_the_listing_as_JSON
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_serves_the_listing_without_a_session
+ - P\Tests\Feature\ProductsJsonTest::__pest_evaluable_it_answers_an_empty_data_list_when_no_product_exists
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_serves_the_verification_form
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_one_row_per_submitted_line
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_keeps_duplicate_submissions_as_separate_rows
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_ignores_blank_lines_and_surrounding_spaces
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_a_registered_visible_code_as_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_an_unregistered_code_as_not_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_a_hidden_product_code_as_not_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_the_code_of_a_deactivated_company_product_as_not_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_a_malformed_code_as_not_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_shows_the_all_valid_banner_when_every_submitted_code_is_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_hides_the_all_valid_banner_when_one_submitted_code_is_not_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_hides_the_all_valid_banner_when_the_only_valid_code_is_accompanied_by_a_hidden_one
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_hides_the_all_valid_banner_when_no_submitted_code_is_valid
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_that_nothing_was_submitted_for_an_empty_submission
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_reports_that_nothing_was_submitted_for_whitespace_only_input
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_verifies_without_a_session
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_shows_the_product_details_on_the_public_product_page
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_shows_the_English_text_and_declares_English_by_default
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_shows_the_English_text_when_English_is_requested
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_shows_the_French_text_when_French_is_requested
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_declares_French_in_the_html_lang_attribute_when_French_is_requested
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_falls_back_to_English_for_an_unknown_language
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_answers_404_on_the_public_page_of_an_unknown_GTIN
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_answers_404_on_the_public_page_of_a_hidden_product
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_serves_the_public_product_page_without_a_session
+ - P\Tests\Feature\PublicPagesTest::__pest_evaluable_it_is_mobile_friendly_through_a_viewport_declaration
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_serves_the_documented_product_shape
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_exposes_exactly_the_documented_top_level_keys
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_reports_the_gross_and_net_weight_of_the_product
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_nests_the_owning_company_with_its_owner_and_contact
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_answers_404_for_a_GTIN_that_is_not_registered
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_answers_404_for_a_hidden_product
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_answers_404_for_a_product_of_a_deactivated_company
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_serves_a_single_product_without_a_session
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_serves_a_single_product_as_JSON
+ - P\Tests\Feature\SingleProductJsonTest::__pest_evaluable_it_answers_a_JSON_body_when_the_product_is_unknown
+ - P\Tests\Security\ExampleTest::__pest_evaluable_it_does_not_expose_internal_columns_through_the_public_API
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_JSON_API"dataset "single quote""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_JSON_API"dataset "always true""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_JSON_API"dataset "union select""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_JSON_API"dataset "drop table""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_JSON_API"dataset "comment out""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_JSON_API"dataset "boolean tail""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_management_listing"dataset "single quote""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_management_listing"dataset "always true""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_management_listing"dataset "union select""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_management_listing"dataset "drop table""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_management_listing"dataset "comment out""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_returns_no_product_for_an_injection_payload_through_the_management_listing"dataset "boolean tail""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_leaves_the_products_table_intact_after_an_injection_payload"dataset "single quote""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_leaves_the_products_table_intact_after_an_injection_payload"dataset "always true""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_leaves_the_products_table_intact_after_an_injection_payload"dataset "union select""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_leaves_the_products_table_intact_after_an_injection_payload"dataset "drop table""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_leaves_the_products_table_intact_after_an_injection_payload"dataset "comment out""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_leaves_the_products_table_intact_after_an_injection_payload"dataset "boolean tail""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_JSON_API"dataset "single quote""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_JSON_API"dataset "always true""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_JSON_API"dataset "union select""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_JSON_API"dataset "drop table""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_JSON_API"dataset "comment out""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_JSON_API"dataset "boolean tail""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_management_listing"dataset "single quote""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_management_listing"dataset "always true""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_management_listing"dataset "union select""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_management_listing"dataset "drop table""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_management_listing"dataset "comment out""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_surfaces_no_database_error_for_an_injection_payload_through_the_management_listing"dataset "boolean tail""
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_treats_a_percent_sign_in_the_keyword_as_ordinary_text
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_treats_an_underscore_in_the_keyword_as_ordinary_text
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_treats_a_wildcard_keyword_as_ordinary_text_in_the_management_listing
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_does_not_widen_the_result_set_with_an_always_true_payload
+ - P\Tests\Security\S1SearchInjectionTest::__pest_evaluable_it_keeps_the_companies_table_intact_after_a_drop_table_payload
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_product_submission_hide_the_product
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_product_update_hide_the_product
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_product_update_unhide_a_hidden_product
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_product_submission_choose_its_own_id
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_product_submission_set_its_timestamps
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_product_submission_set_the_image_path_directly
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_company_submission_deactivate_the_company
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_company_update_deactivate_the_company
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_company_update_reactivate_a_deactivated_company
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_does_not_let_a_company_submission_choose_its_own_id
+ - P\Tests\Security\S2MassAssignmentTest::__pest_evaluable_it_keeps_a_hidden_product_hidden_across_an_ordinary_edit
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_answers_401_on_every_management_route_without_a_session
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_answers_the_same_status_for_a_record_that_exists_and_one_that_does_not
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_answers_the_same_status_for_an_existing_and_a_missing_record_as_JSON
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_reveals_no_record_content_in_the_body_of_an_unauthenticated_request
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_reveals_no_hidden_product_content_to_an_unauthenticated_management_request
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_creates_nothing_on_an_unauthenticated_company_submission
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_creates_nothing_on_an_unauthenticated_product_submission
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_changes_nothing_on_an_unauthenticated_company_update
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_changes_nothing_on_an_unauthenticated_company_deactivation
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_changes_nothing_on_an_unauthenticated_product_update
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_hides_nothing_on_an_unauthenticated_hide_request
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_unhides_nothing_on_an_unauthenticated_unhide_request
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_deletes_nothing_on_an_unauthenticated_delete_request
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_removes_no_image_on_an_unauthenticated_remove_image_request
+ - P\Tests\Security\S3AdminGateTest::__pest_evaluable_it_does_not_accept_a_forged_session_flag_from_the_request
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_refuses_an_executable_script_uploaded_as_a_product_image
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_refuses_an_html_file_uploaded_as_a_product_image
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_refuses_a_script_disguised_with_a_double_extension
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_refuses_a_file_heavier_than_2_MB
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_never_stores_an_uploaded_file_under_the_name_the_client_submitted
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_stores_an_uploaded_image_inside_the_image_directory
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_does_not_let_a_traversing_file_name_escape_the_image_directory
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_does_not_keep_the_previous_file_when_an_image_is_replaced
+ - P\Tests\Security\S4ImageUploadTest::__pest_evaluable_it_stores_nothing_when_the_submission_is_rejected_for_another_reason
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_never_echoes_a_wrong_passphrase_back_to_the_visitor
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_never_echoes_the_submitted_passphrase_in_the_login_form_after_a_failure
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_never_prints_the_configured_passphrase_on_the_login_page
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_never_prints_the_configured_passphrase_after_a_failed_attempt
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_never_prints_the_configured_passphrase_in_the_management_area
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_counts_failed_passphrase_attempts_against_a_rate_limiter
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_does_not_authenticate_the_correct_passphrase_once_the_limiter_is_tripped
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_keeps_the_management_area_closed_after_a_tripped_limiter_and_a_correct_passphrase
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_authenticates_the_correct_passphrase_while_the_limiter_is_clear
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_does_not_accept_a_passphrase_that_only_shares_a_prefix_with_the_configured_one
+ - P\Tests\Security\S5PassphraseTest::__pest_evaluable_it_does_not_accept_a_passphrase_differing_only_in_case
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_never_names_a_hidden_product_in_the_public_listing
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_never_names_a_hidden_product_in_a_keyword_search_of_the_public_listing
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_answers_404_on_the_single_endpoint_of_a_hidden_product
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_answers_404_on_the_public_page_of_a_hidden_product
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_reports_a_hidden_product_as_not_valid_on_the_verification_page
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_never_exposes_the_file_path_of_a_hidden_product
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_exposes_no_internal_column_in_the_public_listing
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_exposes_no_internal_column_on_the_single_product_endpoint
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_exposes_no_database_identifier_in_the_public_listing
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_keeps_a_product_of_a_deactivated_company_out_of_every_public_surface
+ - P\Tests\Security\S6HiddenLeakageTest::__pest_evaluable_it_does_not_let_a_public_request_ask_for_hidden_products
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_product_name_on_the_public_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_product_description_on_the_public_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_French_product_name_on_the_public_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_French_product_description_on_the_public_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_product_name_on_the_management_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_product_description_on_the_management_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_product_name_in_the_management_listing
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_company_name_in_the_company_listing
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_company_name_on_the_company_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_submitted_GTIN_code_on_the_verification_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_the_submitted_text_of_the_verification_textarea
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_the_search_keyword_echoed_by_the_management_listing
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_company_name_shown_on_a_product_management_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_escapes_a_company_name_shown_on_the_public_product_page
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_serves_the_JSON_API_as_application_json
+ - P\Tests\Security\S7EscapingTest::__pest_evaluable_it_serves_stored_markup_as_JSON_data_rather_than_as_a_document
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_public_product_page_is_not_found
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_single_product_endpoint_is_not_found
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_answers_JSON_when_a_JSON_request_fails
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_an_unknown_page_is_requested
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_management_route_is_refused
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_management_record_is_missing_for_an_authenticated_request
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_an_unsupported_method_is_used
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_submission_fails_validation
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_search_keyword_breaks_the_query
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_nothing_when_a_visible_product_is_refused_deletion
+ - P\Tests\Security\S8FailureLeakageTest::__pest_evaluable_it_leaks_no_configuration_value_in_a_failure_page.
